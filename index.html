@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Rano ka bot</title>
+<style>
+    body {
+        font-family: sans-serif;
+        background: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    #chatbox {
+        width: 350px;
+        height: 500px;
+        background: white;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    #messages {
+        flex: 1;
+        padding: 10px;
+        overflow-y: auto;
+    }
+    .msg {
+        margin: 5px 0;
+        padding: 8px 12px;
+        border-radius: 15px;
+        max-width: 80%;
+    }
+    .user {
+        background: #d1f0ff;
+        align-self: flex-end;
+    }
+    .bot {
+        background: #e5e5e5;
+        align-self: flex-start;
+    }
+    #inputBar {
+        display: flex;
+        border-top: 1px solid #ccc;
+    }
+    input {
+        flex: 1;
+        border: none;
+        padding: 10px;
+        font-size: 16px;
+    }
+    button {
+        background: #007aff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<div id="chatbox">
+    <div id="messages"></div>
+    <div id="inputBar">
+        <input id="userInput" placeholder="Type here...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+function sendMessage() {
+    let input = document.getElementById("userInput");
+    let text = input.value.trim();
+    if (text === "") return;
+
+    addMessage(text, "user");
+    input.value = "";
+
+    setTimeout(() => {
+        addMessage("Aliha is always right!", "bot");
+    }, 500);
+}
+
+function addMessage(text, type) {
+    let msgDiv = document.createElement("div");
+    msgDiv.className = `msg ${type}`;
+    msgDiv.innerText = text;
+    document.getElementById("messages").appendChild(msgDiv);
+    msgDiv.scrollIntoView();
+}
+</script>
+
+</body>
+</html>
